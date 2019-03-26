@@ -3,7 +3,7 @@
 " ---------
 let g:neomake_open_list = 0
 let g:neomake_verbose = 1
-let g:airline#extensions#neomake#enabled = 0
+let g:airline#extensions#neomake#enabled = 1
 
 if ! empty(g:python3_host_prog)
 	let g:neomake_python_python_exe = g:python3_host_prog
@@ -51,5 +51,7 @@ endfunction
 
 autocmd MyAutoCmd BufWritePre *.js call s:set_javascript_exe()
 call s:set_javascript_exe()
+
+call neomake#configure#automake('nrwi', 500)
 
 " vim: set foldmethod=marker ts=2 sw=2 tw=80 noet :
