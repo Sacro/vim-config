@@ -1,0 +1,71 @@
+---
+
+- {repo: aliou/bats.vim}
+
+- {repo: chriskempson/base16-vim}
+
+- repo: crusoexia/vim-javascript-lib
+  on_ft: ['javascript', 'jsx', 'javascript.jsx']
+
+- {repo: crusoexia/vim-monokai}
+- {repo: ctrlpvim/ctrlp.vim}
+- {repo: edkolev/tmuxline.vim}
+- {repo: mox-mox/vim-localsearch}
+- {repo: ryanoasis/vim-devicons}
+- {repo: DanManN/vim-razer}
+
+- {repo: jparise/vim-graphql, on_ft: graphql}
+
+- {repo: Glench/Vim-Jinja2-Syntax, on_ft: sls}
+- {repo: saltstack/salt-vim, on_ft: sls}
+
+- {repo: hashivim/vim-terraform, on_ft: terraform}
+- {repo: juliosueiras/vim-terraform-completion, on_ft: terraform}
+
+- {repo: HerringtonDarkholme/yats.vim, on_ft: typescript}
+- {repo: leafgarland/typescript-vim, on_ft: typescript}
+
+- repo: mhartington/nvim-typescript
+  on_ft: typescript
+  build: ./install.sh
+
+- repo: OmniSharp/omnisharp-vim
+  on_ft: cs
+  build: cd omnisharp-vim &&
+    \ git submodule update --init --recursive &&
+    \ cd server &&
+    \ xbuild /p:TargetFrameworkVersion="v4.5
+
+- repo: prettier/vim-prettier
+  on_ft: |
+    ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', \
+    'markdown', 'vue']
+  hook_add: |
+    let g:prettier#nvim_unstable_async=1
+
+- repo: vim-airline/vim-airline
+  hook_add: |
+    let g:airline_powerline_fonts = 1
+
+    let g:airline#extensions#ale#enabled = 1
+    let g:airline#extensions#neomake#enabled = 1
+    let g:airline#extensions#tabline#enabled = 1
+    let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+
+    let g:airline_theme = 'base16_monokai'
+
+- {repo: vim-airline/vim-airline-themes}
+
+- repo: w0rp/ale
+  hook_add: |
+    let g:ale_set_loclist = 0
+    let g:ale_set_quickfix = 1
+    let g:ale_keep_list_window_open = 1
+    let g:ale_fix_on_save = 1
+    let g:ale_fixers = {'javascript': ['prettier_eslint']}
+    let g:ale_linters = {'javascript': ['eslint']}
+    let g:ale_javascript_prettier_use_local_config = 1
+
+- {repo: wsdjeg/dein-ui.vim}
+
+- {repo: Xuyuanp/nerdtree-git-plugin}
