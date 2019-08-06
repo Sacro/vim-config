@@ -1,6 +1,5 @@
-
 " Key-mappings
-"---------------------------------------------------------
+" ---
 
 " Non-standard {{{
 " ------------
@@ -68,7 +67,7 @@ cnoreabbrev bD bd
 inoremap <S-Return> <C-o>o
 
 " Quick substitute within selected area
-xnoremap s :s//g<Left><Left>
+xnoremap sg :s//g<Left><Left>
 
 nnoremap zl z5l
 nnoremap zh z5h
@@ -93,8 +92,8 @@ xnoremap < <gv
 xnoremap > >gv|
 
 " Use tab for indenting
-vnoremap <Tab> >gv|
-vnoremap <S-Tab> <gv
+xnoremap <Tab> >gv|
+xnoremap <S-Tab> <gv
 nmap >>  >>_
 nmap <<  <<_
 
@@ -138,7 +137,6 @@ cmap W!! w !sudo tee % >/dev/null
 
 " I like to :quit with 'q', shrug.
 nnoremap <silent> q :<C-u>:quit<CR>
-autocmd MyAutoCmd FileType man nnoremap <silent><buffer> q :<C-u>:quit<CR>
 
 " Macros
 nnoremap Q q
@@ -159,15 +157,11 @@ nmap <silent> <Leader>tw :setlocal wrap! breakindent!<CR>
 " Tabs
 nnoremap <silent> g0 :<C-u>tabfirst<CR>
 nnoremap <silent> g$ :<C-u>tablast<CR>
-nnoremap <silent> gr :<C-u>tabprevious<CR>
+nnoremap <silent> g5 :<C-u>tabprevious<CR>
 nnoremap <silent> <A-j> :<C-U>tabnext<CR>
 nnoremap <silent> <A-k> :<C-U>tabprevious<CR>
 nnoremap <silent> <C-Tab> :<C-U>tabnext<CR>
 nnoremap <silent> <C-S-Tab> :<C-U>tabprevious<CR>
-" Uses g:lasttab set on TabLeave in MyAutoCmd
-let g:lasttab = 1
-nmap <silent> \\ :execute 'tabn '.g:lasttab<CR>
-
 
 " }}}
 " Totally Custom {{{
@@ -229,9 +223,11 @@ function! s:toggle_contrast(delta)
 	endif
 endfunction
 
-" Location list movement
-nmap <Leader>j :lnext<CR>
-nmap <Leader>k :lprev<CR>
+" Location/quickfix list movement
+nmap ]c :lnext<CR>
+nmap [c :lprev<CR>
+nmap ]q :cnext<CR>
+nmap [q :cprev<CR>
 
 " Duplicate lines
 nnoremap <Leader>d m`YP``
@@ -251,34 +247,25 @@ vnoremap mj :m'>+<CR>gv=gv
 noremap  mk :m-2<CR>
 noremap  mj :m+<CR>
 
-" Session management shortcuts
-nmap <silent> <Leader>se :<C-u>execute 'SessionSave' fnamemodify(resolve(getcwd()), ':p:gs?/?_?')<CR>
-nmap <silent> <Leader>os :<C-u>execute 'source '.g:session_directory.'/'.fnamemodify(resolve(getcwd()), ':p:gs?/?_?').'.vim'<CR>
+" Context-aware action-menu, neovim only (see plugin/actionmenu.vim)
+if has('nvim')
+	nmap <silent> <LocalLeader>c :<C-u>ActionMenu<CR>
+endif
+
+" Session management shortcuts (see plugin/sessions.vim)
+nmap <silent> <Leader>se :<C-u>SessionSave<CR>
+nmap <silent> <Leader>os :<C-u>SessionLoad<CR>
 
 if has('mac')
 	" Open the macOS dictionary on current word
 	nmap <Leader>? :!open dict://<cword><CR><CR>
 
 	" Use Marked for real-time Markdown preview
+	"
 	if executable('/Applications/Marked 2.app/Contents/MacOS/Marked 2')
-		autocmd MyAutoCmd FileType markdown
+		autocmd user_events FileType markdown
 			\ nmap <buffer><Leader>P :silent !open -a Marked\ 2.app '%:p'<CR>
 	endif
-
-	" Use Dash on Mac, for context help
-	if executable('/Applications/Dash.app/Contents/MacOS/Dash')
-		autocmd MyAutoCmd FileType yaml.ansible,php,css,less,html,markdown
-			\ nmap <silent><buffer> K :!open -g dash://"<C-R>=split(&ft, '\.')[0]<CR>:<cword>"&<CR><CR>
-		autocmd MyAutoCmd FileType javascript,javascript.jsx,sql,ruby,conf,sh
-			\ nmap <silent><buffer> K :!open -g dash://"<cword>"&<CR><CR>
-	endif
-
-" Use Zeal on Linux for context help
-elseif executable('zeal')
-	autocmd MyAutoCmd FileType yaml.ansible,php,css,less,html,markdown
-		\ nmap <silent><buffer> K :!zeal --query "<C-R>=split(&ft, '\.')[0]<CR>:<cword>"&<CR><CR>
-	autocmd MyAutoCmd FileType javascript,javascript.jsx,sql,ruby,conf,sh
-		\ nmap <silent><buffer> K :!zeal --query "<cword>"&<CR><CR>
 endif
 
 " }}}
@@ -334,17 +321,18 @@ function! s:SweepBuffers()
 	endif
 endfunction
 
-" OpenChangedFiles COMMAND
 " Open a split for each dirty file in git
 function! OpenChangedFiles()
-	only " Close all windows, unless they're modified
+	silent only " Close all windows, unless they're modified
 	let status =
 		\ system('git status -s | grep "^ \?\(M\|A\|UU\)" | sed "s/^.\{3\}//"')
 	let filenames = split(status, "\n")
-	exec 'edit ' . filenames[0]
-	for filename in filenames[1:]
-		exec 'sp ' . filename
-	endfor
+	if ! empty(filenames)
+		exec 'edit ' . filenames[0]
+		for filename in filenames[1:]
+			exec 'sp ' . filename
+		endfor
+	endif
 endfunction
 
 " vim: set ts=2 sw=2 tw=80 noet :
