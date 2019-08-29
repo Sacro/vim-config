@@ -9,7 +9,6 @@
 
 - {repo: crusoexia/vim-monokai}
 - {repo: ctrlpvim/ctrlp.vim}
-- {repo: edkolev/tmuxline.vim}
 - {repo: mox-mox/vim-localsearch}
 - {repo: ryanoasis/vim-devicons}
 - {repo: DanManN/vim-razer}
