@@ -77,13 +77,24 @@ if dein#tap('emmet-vim')
 		\ | imap <buffer> <C-Return> <Plug>(emmet-expand-abbr)
 endif
 
-if dein#tap('vim-operator-surround')
-	map <silent>sa <Plug>(operator-surround-append)
-	map <silent>sd <Plug>(operator-surround-delete)
-	map <silent>sr <Plug>(operator-surround-replace)
-	nmap <silent>saa <Plug>(operator-surround-append)<Plug>(textobj-multiblock-i)
-	nmap <silent>sdd <Plug>(operator-surround-delete)<Plug>(textobj-multiblock-a)
-	nmap <silent>srr <Plug>(operator-surround-replace)<Plug>(textobj-multiblock-a)
+if dein#tap('vim-sandwich')
+	nmap <silent> sa <Plug>(operator-sandwich-add)
+	xmap <silent> sa <Plug>(operator-sandwich-add)
+	omap <silent> sa <Plug>(operator-sandwich-g@)
+	nmap <silent> sd <Plug>(operator-sandwich-delete)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)
+	xmap <silent> sd <Plug>(operator-sandwich-delete)
+	nmap <silent> sr <Plug>(operator-sandwich-replace)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)
+	xmap <silent> sr <Plug>(operator-sandwich-replace)
+	nmap <silent> sdb <Plug>(operator-sandwich-delete)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-auto-a)
+	nmap <silent> srb <Plug>(operator-sandwich-replace)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-auto-a)
+	omap ib <Plug>(textobj-sandwich-auto-i)
+	xmap ib <Plug>(textobj-sandwich-auto-i)
+	omap ab <Plug>(textobj-sandwich-auto-a)
+	xmap ab <Plug>(textobj-sandwich-auto-a)
+	omap is <Plug>(textobj-sandwich-query-i)
+	xmap is <Plug>(textobj-sandwich-query-i)
+	omap as <Plug>(textobj-sandwich-query-a)
+	xmap as <Plug>(textobj-sandwich-query-a)
 endif
 
 if dein#tap('vim-operator-replace')
@@ -96,8 +107,9 @@ if dein#tap('vim-operator-flashy')
 endif
 
 if dein#tap('vim-niceblock')
-	xmap I  <Plug>(niceblock-I)
-	xmap A  <Plug>(niceblock-A)
+	silent! xmap I  <Plug>(niceblock-I)
+	silent! xmap gI <Plug>(niceblock-gI)
+	silent! xmap A  <Plug>(niceblock-A)
 endif
 
 if dein#tap('accelerated-jk')
@@ -126,13 +138,30 @@ if dein#tap('vim-indent-guides')
 	nmap <silent><Leader>ti :<C-u>IndentGuidesToggle<CR>
 endif
 
-if dein#tap('vim-bookmarks')
-	nmap ma :<C-u>cgetexpr bm#location_list()<CR>
-		\ :<C-u>Denite quickfix -no-start-filter<CR>
-	nmap mn <Plug>BookmarkNext
-	nmap mp <Plug>BookmarkPrev
-	nmap mm <Plug>BookmarkToggle
-	nmap mi <Plug>BookmarkAnnotate
+if dein#tap('vim-signature')
+	let g:SignatureMap = {
+		\ 'Leader':            'm',
+		\ 'ListBufferMarks':   'm/',
+		\ 'ListBufferMarkers': 'm?',
+		\ 'PlaceNextMark':     'm,',
+		\ 'ToggleMarkAtLine':  'mm',
+		\ 'PurgeMarksAtLine':  'm-',
+		\ 'DeleteMark':        'dm',
+		\ 'PurgeMarks':        'm<Space>',
+		\ 'PurgeMarkers':      'm<BS>',
+		\ 'GotoNextLineAlpha': "']",
+		\ 'GotoPrevLineAlpha': "'[",
+		\ 'GotoNextSpotAlpha': '`]',
+		\ 'GotoPrevSpotAlpha': '`[',
+		\ 'GotoNextLineByPos': "]'",
+		\ 'GotoPrevLineByPos': "['",
+		\ 'GotoNextSpotByPos': 'mn',
+		\ 'GotoPrevSpotByPos': 'mp',
+		\ 'GotoNextMarker':    ']-',
+		\ 'GotoPrevMarker':    '[-',
+		\ 'GotoNextMarkerAny': 'mj',
+		\ 'GotoPrevMarkerAny': 'mk',
+		\ }
 endif
 
 if dein#tap('auto-git-diff')
@@ -196,6 +225,7 @@ if dein#tap('vim-gitgutter')
 	nmap ]g <Plug>GitGutterNextHunk
 	nmap [g <Plug>GitGutterPrevHunk
 	nmap gS <Plug>GitGutterStageHunk
+	xmap gS <Plug>GitGutterStageHunk
 	nmap <Leader>gr <Plug>GitGutterUndoHunk
 	nmap gs <Plug>GitGutterPreviewHunk
 endif
@@ -249,8 +279,8 @@ if dein#tap('undotree')
 	nnoremap <Leader>gu :UndotreeToggle<CR>
 endif
 
-if dein#tap('vim-online-thesaurus')
-	nnoremap <silent> <Leader>K :<C-u>OnlineThesaurusCurrentWord<CR>
+if dein#tap('thesaurus_query.vim')
+	nnoremap <silent> <Leader>K :<C-u>ThesaurusQueryReplaceCurrentWord<CR>
 endif
 
 if dein#tap('vim-asterisk')
