@@ -11,6 +11,8 @@ if has('gui_running')
 endif
 " }}}
 
+" Terminal colors {{{
+" ---
 let g:terminal_color_0 = '#2a2a2a'
 let g:terminal_color_1 = '#d370a3'
 let g:terminal_color_2 = '#6d9e3f'
@@ -27,6 +29,7 @@ let g:terminal_color_12 = '#98cbfe'
 let g:terminal_color_13 = '#e5b0ff'
 let g:terminal_color_14 = '#75daa9'
 let g:terminal_color_15 = '#cfcfcf'
+" }}}
 
 " Tabline {{{
 " ---
@@ -65,15 +68,18 @@ highlight User8 guifg=#ffb964 guibg=#30302c ctermfg=215 ctermbg=236
 " Highlights: General GUI {{{
 " ---
 highlight! link jsFutureKeys PreProc
+highlight! WarningMsg  ctermfg=100 guifg=#CCC566
+" Matchparens
+highlight! MatchParen  ctermfg=NONE guifg=NONE ctermbg=236 guibg=#2d3c42
+highlight! ParenMatch  ctermfg=NONE guifg=NONE ctermbg=236 guibg=#494d2a
+" Cursorword plugin:
+highlight! CursorWord0 ctermfg=NONE guifg=NONE ctermbg=236 guibg=#2b2a22
+
 " highlight! Error  term=NONE cterm=NONE
 " highlight! link WarningMsg  Comment
 " highlight! link pythonSpaceError  NONE
 " highlight! link pythonIndentError NONE
 " highlight! link mkdLineBreak      NONE
-highlight! WarningMsg ctermfg=100 guifg=#CCC566
-highlight! MatchParen ctermfg=NONE guifg=NONE ctermbg=236 guibg=#2d3c42
-highlight! ParenMatch  ctermfg=NONE guifg=NONE ctermbg=236 guibg=#494d2a
-highlight! CursorWord0 ctermfg=NONE guifg=NONE ctermbg=236 guibg=#2b2a22
 " }}}
 
 " Plugin: Defx icons and highlights {{{
