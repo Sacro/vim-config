@@ -30,10 +30,6 @@
 
 - repo: OmniSharp/omnisharp-vim
   on_ft: cs
-  build: cd omnisharp-vim &&
-    \ git submodule update --init --recursive &&
-    \ cd server &&
-    \ xbuild /p:TargetFrameworkVersion="v4.5
 
 - repo: prettier/vim-prettier
   on_ft: |
