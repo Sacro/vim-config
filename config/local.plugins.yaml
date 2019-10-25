@@ -21,28 +21,11 @@
 - {repo: hashivim/vim-terraform, on_ft: terraform}
 - {repo: juliosueiras/vim-terraform-completion, on_ft: terraform}
 
-- {repo: HerringtonDarkholme/yats.vim, on_ft: typescript}
-- {repo: leafgarland/typescript-vim, on_ft: typescript}
-
-- repo: mhartington/nvim-typescript
-  on_ft: typescript
-  build: ./install.sh
-
-- repo: OmniSharp/omnisharp-vim
-  on_ft: cs
-
-- repo: prettier/vim-prettier
-  on_ft: |
-    ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', \
-    'markdown', 'vue']
-  hook_add: |
-    let g:prettier#nvim_unstable_async=1
-
 - repo: vim-airline/vim-airline
   hook_add: |
     let g:airline_powerline_fonts = 1
 
-    let g:airline#extensions#ale#enabled = 1
+    let g:airline#extensions#coc#enabled = 1
     let g:airline#extensions#neomake#enabled = 1
     let g:airline#extensions#tabline#enabled = 1
     let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
