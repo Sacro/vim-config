@@ -36,3 +36,7 @@ if has('win32')
   let g:python3_host_prog = 'c:/users/ben/scoop/shims/python3.exe'
 endif
 
+if (exists('g:gnvim'))
+	set guifont=Hack\ Nerd\ Font\ Mono:h12
+endif
+
