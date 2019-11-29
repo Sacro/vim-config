@@ -21,6 +21,10 @@
 - {repo: hashivim/vim-terraform, on_ft: terraform}
 - {repo: juliosueiras/vim-terraform-completion, on_ft: terraform}
 
+- repo: mhartington/nvim-typescript
+  on_ft: typescript
+  build: ./install.sh
+
 - repo: vim-airline/vim-airline
   hook_add: |
     let g:airline_powerline_fonts = 1
