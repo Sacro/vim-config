@@ -1,0 +1,18 @@
+---
+
+- repo: chriskempson/base16-vim
+- repo: ctrlpvim/ctrlp.vim
+- repo: edkolev/tmuxline.vim
+- repo: ryanoasis/vim-devicons
+
+- repo: jparise/vim-graphql
+  on_ft: graphql
+
+- repo: vim-airline/vim-airline
+  hook_add: |
+    let g:airline_powerline_fonts = 1
+    let g:airline_theme = 'base16_monokai'
+    let g:airline#extensions#tabline#enabled = 1
+    let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+
+- repo: vim-airline/vim-airline-themes
