@@ -4,6 +4,7 @@
 - repo: ctrlpvim/ctrlp.vim
 - repo: edkolev/tmuxline.vim
 - repo: ryanoasis/vim-devicons
+- repo: wsdjeg/dein-ui.vim
 
 - repo: jparise/vim-graphql
   on_ft: graphql
