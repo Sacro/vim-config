@@ -2,7 +2,7 @@
 
 - repo: chriskempson/base16-vim
 - repo: ctrlpvim/ctrlp.vim
-- repo: edkolev/tmuxline.vim
+  #- repo: edkolev/tmuxline.vim
 - repo: ryanoasis/vim-devicons
 - repo: wsdjeg/dein-ui.vim
 
