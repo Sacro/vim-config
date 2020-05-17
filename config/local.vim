@@ -1,4 +1,6 @@
-colorscheme base16-monokai
+"colorscheme base16-monokai
+
+set guifont=Hack\ Nerd\ Font\ Mono
 
 if (exists('g:gnvim'))
 	set guifont=Hack\ Nerd\ Font\ Mono:h12
