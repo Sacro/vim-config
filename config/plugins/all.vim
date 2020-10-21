@@ -73,9 +73,14 @@ if dein#tap('vim-clap')
 	autocmd user_events FileType clap_input call s:clap_mappings()
 
 	function! s:clap_mappings()
+		nnoremap <silent> <buffer> <nowait> <Space> :call clap#handler#tab_action()<CR>
 		nnoremap <silent> <buffer> <nowait>' :call clap#handler#tab_action()<CR>
 		inoremap <silent> <buffer> <Tab>   <C-R>=clap#navigation#linewise('down')<CR>
 		inoremap <silent> <buffer> <S-Tab> <C-R>=clap#navigation#linewise('up')<CR>
+		nnoremap <silent> <buffer> <C-j> :<C-u>call clap#navigation#linewise('down')<CR>
+		nnoremap <silent> <buffer> <C-k> :<C-u>call clap#navigation#linewise('up')<CR>
+		nnoremap <silent> <buffer> <C-n> :<C-u>call clap#navigation#linewise('down')<CR>
+		nnoremap <silent> <buffer> <C-p> :<C-u>call clap#navigation#linewise('up')<CR>
 		nnoremap <silent> <buffer> <C-f> :<c-u>call clap#navigation#scroll('down')<CR>
 		nnoremap <silent> <buffer> <C-b> :<c-u>call clap#navigation#scroll('up')<CR>
 
@@ -401,6 +406,18 @@ if dein#tap('caw.vim')
 	endfunction
 	autocmd user_events FileType * call InitCaw()
 	call InitCaw()
+endif
+
+if dein#tap('fin.vim')
+	nnoremap <Leader>f :<C-u>Fin<CR>
+
+	function! InitFin() abort
+		cmap <buffer><nowait> <Tab>   <Plug>(fin-line-next)
+		cmap <buffer><nowait> <S-Tab> <Plug>(fin-line-prev)
+		cmap <buffer><nowait> <C-j>   <Plug>(fin-line-next)
+		cmap <buffer><nowait> <C-k>   <Plug>(fin-line-prev)
+	endfunction
+	autocmd user_events FileType fin call InitFin()
 endif
 
 if dein#tap('vim-textobj-function')
