@@ -9,3 +9,7 @@ endif
 if (exists('veonim'))
 	set guifont=Hack\ Nerd\ Font\ Mono:h14
 endif
+
+let g:tabline_plugin_enable = 0
+let g:statusline_plugin_enable = 0
+
