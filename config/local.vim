@@ -1,4 +1,4 @@
-"colorscheme base16-monokai
+colorscheme vim-monokai-tasty
 
 set guifont=Hack\ Nerd\ Font\ Mono
 
